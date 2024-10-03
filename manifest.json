@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "force_delete",
   "version": "1.0",
 
@@ -9,7 +9,9 @@
     {
       "matches": ["*://*.console.aws.amazon.com/*"],
       "js": ["main.js"],
-      "all_frames": true
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
     }
   ]
 }
