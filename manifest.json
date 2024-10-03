@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "force_delete",
+  "version": "1.0",
+
+  "description": "automatically types AWS's delete-safe words",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.console.aws.amazon.com/*"],
+      "js": ["main.js"],
+      "all_frames": true
+    }
+  ]
+}
