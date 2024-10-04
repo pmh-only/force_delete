@@ -1,14 +1,32 @@
 {
   "manifest_version": 3,
-  "name": "force_delete",
+  "name": "Koishi ~~ Hello- I'm behind you right now. ~~",
   "version": "1.0",
 
-  "description": "automatically types AWS's delete-safe words",
+  "description": "Hello- I'm behind you right now.",
+
+  "icons": {
+    "48": "icons/koishi.webp"
+  },
+
+  "action": {
+    "default_icon": "icons/koishi.webp",
+    "default_title": "Koishi",
+    "default_popup": "popup/index.html"
+  },
+
+  "host_permissions": [
+    "*://*.console.aws.amazon.com/*"
+  ],
+
 
   "content_scripts": [
     {
       "matches": ["*://*.console.aws.amazon.com/*"],
-      "js": ["main.js"],
+      "js": [
+        "force_delete.js",
+        "form_saver.js"
+      ],
       "all_frames": true,
       "match_about_blank": true,
       "match_origin_as_fallback": true
