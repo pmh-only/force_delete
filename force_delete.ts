@@ -4,18 +4,22 @@ class ForceDeleteExtension {
   private readonly EXPLICIT_TARGET_SELECTORS = [
 
     // S3 ---
-    '.empty-bucket-actions__input>input',
     '.delete-bucket-actions__input>input',
 
     // VPC ---
-    'div[data-id="confirmation-modal-input"]>input'
+    'div[data-id="confirmation-modal-input"]>input',
+
+    // IAM ---
+    'div[data-testid="roles-delete-modal-input"]>input',
+    'div[data-testid="policies-delete-modal-input"]>input'
 
   ]
 
   private readonly IMPLICIT_TARGET_PLACEHOLDERS = [
     'delete',
     'delete me',
-    'confirm'
+    'confirm',
+    'permanently delete'
   ]
 
   public readonly startLoop = (): void => {
