@@ -1,0 +1,9 @@
+.__force_deleted {
+  animation: __force_deleted 0.2s ease-out;
+}
+
+@keyframes __force_deleted {
+  0% { scale: inherit }
+  50% { scale: 1.1 }
+  100% { scale: inherit }
+}

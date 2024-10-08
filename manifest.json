@@ -9,23 +9,14 @@
     "48": "icons/koishi.webp"
   },
 
-  "action": {
-    "default_icon": "icons/koishi.webp",
-    "default_title": "Koishi",
-    "default_popup": "popup/index.html"
-  },
-
-  "host_permissions": [
-    "*://*.console.aws.amazon.com/*"
-  ],
-
-
   "content_scripts": [
     {
       "matches": ["*://*.console.aws.amazon.com/*"],
       "js": [
-        "force_delete.js",
-        "form_saver.js"
+        "force_delete.js"
+      ],
+      "css": [
+        "force_delete.css"
       ],
       "all_frames": true,
       "match_about_blank": true,

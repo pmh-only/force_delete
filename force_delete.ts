@@ -1,5 +1,5 @@
 class ForceDeleteExtension {
-  private readonly LOOP_INTERVAL_TIME = 500
+  private readonly LOOP_INTERVAL_TIME = 100
 
   private readonly EXPLICIT_TARGET_SELECTORS = [
 
@@ -11,7 +11,11 @@ class ForceDeleteExtension {
 
     // IAM ---
     'div[data-testid="roles-delete-modal-input"]>input',
-    'div[data-testid="policies-delete-modal-input"]>input'
+    'div[data-testid="policies-delete-modal-input"]>input',
+    'div[data-testid="policies-from-role-delete-modal-input"]>input',
+
+    // Firehose ---
+    'div[data-hook="DELETE_CONFIRMATION_INPUT"]>input'
 
   ]
 
@@ -73,6 +77,8 @@ class ForceDeleteExtension {
     elements.forEach(this.applyDeleteMessage.bind(this))
 
   private readonly applyDeleteMessage = (element: HTMLInputElement): void => {
+    element.classList.add('__force_deleted')
+
     element.value = element.placeholder
     element.dispatchEvent(new Event('input', {
       bubbles: true
