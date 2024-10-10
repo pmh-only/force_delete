@@ -15,8 +15,18 @@ class ForceDeleteExtension {
     'div[data-testid="policies-from-role-delete-modal-input"]>input',
 
     // Firehose ---
-    'div[data-hook="DELETE_CONFIRMATION_INPUT"]>input'
+    'div[data-hook="DELETE_CONFIRMATION_INPUT"]>input',
 
+    // RDS ---
+    'div[data-testid="delete-protection-input"]>input'
+
+  ]
+
+  private readonly OVERRIDDEN_TARGET_VALUES = [
+    {
+      target: 'div[data-testid="delete-protection-input"]>input',
+      value: 'delete me'
+    }
   ]
 
   private readonly IMPLICIT_TARGET_PLACEHOLDERS = [
@@ -77,13 +87,30 @@ class ForceDeleteExtension {
     elements.forEach(this.applyDeleteMessage.bind(this))
 
   private readonly applyDeleteMessage = (element: HTMLInputElement): void => {
-    element.classList.add('__force_deleted')
+    element.classList.add('__force_deleted') // Play autocomplete animation
 
-    element.value = element.placeholder
+    element.value = this.calculateValue(element)
     element.dispatchEvent(new Event('input', {
       bubbles: true
     }))
   }
+
+  //
+  // Value Calculator ---
+  private readonly calculateValue = (element: HTMLInputElement): string =>
+    this.findOverriddenValue(element) ??
+    this.findPlaceholderValue(element) ??
+    'delete'
+
+  private readonly findOverriddenValue = (element: HTMLElement): string | undefined =>
+    this.OVERRIDDEN_TARGET_VALUES
+      .find((v) => [...document.querySelectorAll(v.target)].includes(element))
+      ?.value
+
+  private readonly findPlaceholderValue = (element: HTMLInputElement): string | undefined =>
+    element.placeholder.length > 0
+      ? element.placeholder
+      : undefined
 }
 
 //
