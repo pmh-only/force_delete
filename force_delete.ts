@@ -10,6 +10,7 @@ class ForceDeleteExtension {
     'div[data-id="confirmation-modal-input"]>input',
 
     // IAM ---
+    'div[data-testid="delete-user-input-test1"]>input',
     'div[data-testid="roles-delete-modal-input"]>input',
     'div[data-testid="policies-delete-modal-input"]>input',
     'div[data-testid="policies-from-role-delete-modal-input"]>input',
