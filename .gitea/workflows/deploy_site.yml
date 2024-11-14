@@ -1,0 +1,18 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  deploy_site:
+    runs-on: ubuntu-latest
+    container: 
+      image: src.pmh.codes/build-tools/react2minio:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mc alias set minio http://minio-service.minio.svc.cluster.local:9000 ${{ secrets.MINIO_ACCESS_KEY }} ${{ secrets.MINIO_SECRET_KEY }}
+      - run: apk add zip
+      - run: npm i
+      - run: npm run build
+      - run: zip -r force_delete.zip force_delete.js manifest.json icons
+      - run: mc cp $PWD/force_delete.zip minio/releases/force_delete/force_delete_packed.zip
+
